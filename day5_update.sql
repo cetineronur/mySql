@@ -56,6 +56,7 @@ where isyeri in(select marka_isim from markalar where calisan_sayisi>15000)
   where marka_isim in(select isyeri from calisanlar where sehir='Ankara');
   
   
+  
   /* ===================== AGGREGATE METOT KULLANIMI ===========================
     Aggregate Metotlari(SUM,COUNT, MIN,MAX, AVG) Subquery içinde kullanilabilir.
     Ancak, Sorgu tek bir değer döndürüyor olmalidir.
