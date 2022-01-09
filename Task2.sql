@@ -34,11 +34,16 @@ CREATE TABLE calisanlar
     from (select maas from calisanlar)vs);
     
     -- Çalışanların  isim  ve  cocuk_sayisi'ni  listeleyen  bir  sorgu  yazınız. 
+   --  1.yol
  select isim, (select cocuk_sayisi from aileler where calisanlar.id=aileler.id)as cocukSayisi from calisanlar;   
-       
-    -- calisanlar' ın  id, isim ve toplam_gelir'lerini gösteren bir sorgu yazınız.  
-select id, isim, ((select ek_gelir from aileler where calisanlar.id=aileler.id)+maas) as toplam_gelir from calisanlar;    
+   --  2.yol
+   select isim, cocuk_sayisi from calisanlar, aileler where calisanlar.id=aileler.id;
 
+    -- calisanlar' ın  id, isim ve toplam_gelir'lerini gösteren bir sorgu yazınız. 
+    -- 1.yol
+select id, isim, ((select ek_gelir from aileler where calisanlar.id=aileler.id)+maas) as toplam_gelir from calisanlar;    
+	-- 2.yol
+select isim, (maas+ek_gelir) from calisanlar, aileler where calisanlar.id=aileler.id;
 	-- Eğer bir ailenin kişi başı geliri 2000 TL den daha az ise o çalışanın 
     -- maaşına ek %10 aile yardım zammı yapınız. 
 update calisanlar set maas=maas*1.1 where ((select ek_gelir from aileler where calisanlar.id=aileler.id)+maas)/
